@@ -8,6 +8,8 @@ const app = require("./app");
 //   process.env.DATABASE_PASSWORD
 // );
 // console.log(DB);
+
+// mongodb connection
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.DATABASE, {
