@@ -1,0 +1,81 @@
+const mongoose = require("mongoose");
+const slugify = require("slugify");
+
+const phoneSchema = new mongoose.Schema({
+  condition: {
+    type: String,
+    required: [true, "Phone must have a condition..."],
+  },
+  brandname: {
+    type: String,
+    required: [true, "Phone must have a brand name..."],
+  },
+  model: {
+    type: String,
+    required: [true, "Phone must have a model..."],
+  },
+  slug: String,
+  network: {
+    type: String,
+  },
+  sim: {
+    type: String,
+  },
+  os: {
+    type: String,
+  },
+  memory: {
+    type: String,
+  },
+  main_camera: {
+    type: String,
+  },
+  selfie_camera: {
+    type: String,
+  },
+  sound: {
+    type: String,
+  },
+  wifi: {
+    type: String,
+  },
+  bluetooth: {
+    type: String,
+  },
+  radio: String,
+  usb: String,
+  sensors: String,
+  location: String,
+  phone_number: String,
+  price: Number,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  images: [String],
+  user: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+  ],
+});
+
+phoneSchema.pre("save", function (next) {
+  this.slug = slugify(`${this.brandname}_${this.model}_${this.condition}`, {
+    lower: true,
+  });
+  next();
+});
+
+phoneSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "-__v -passwordChangedAt -password",
+  });
+  next();
+});
+
+const Phone = mongoose.model("Phone", phoneSchema);
+
+module.exports = Phone;
