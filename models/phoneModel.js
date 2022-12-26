@@ -76,6 +76,12 @@ phoneSchema.pre(/^find/, function (next) {
   next();
 });
 
+// phoneSchema.virtual("user_virtual", {
+//   ref: "User",
+//   foreignField: "_id",
+//   localField: "user",
+// });
+
 const Phone = mongoose.model("Phone", phoneSchema);
 
 module.exports = Phone;
