@@ -46,7 +46,7 @@ const phoneSchema = new mongoose.Schema({
   usb: String,
   sensors: String,
   location: String,
-  phone_number: String,
+  phoneNumber: String,
   price: Number,
   createdAt: {
     type: Date,

@@ -6,6 +6,7 @@ const app = express();
 
 const userRouter = require("./routes/userRoute");
 const phoneRouter = require("./routes/phoneRouter");
+const accessoriesRouter = require("./routes/accessoriesRouter");
 
 if (process.env.NODE_ENV == "development") {
   app.use(morgan("dev"));
@@ -21,5 +22,6 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/phones", phoneRouter);
+app.use("/api/v1/accessories", accessoriesRouter);
 
 module.exports = app;
