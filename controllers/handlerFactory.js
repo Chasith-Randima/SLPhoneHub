@@ -4,7 +4,11 @@ const APIFeatures = require("./../utils/apiFeatures");
 
 exports.createOne = (Model, name_model) =>
   catchAsync(async (req, res, next) => {
-    if (name_model == "phone" || name_model == "Accessory") {
+    if (
+      name_model == "phone" ||
+      name_model == "Accessory" ||
+      name_model == "Wanted"
+    ) {
       req.body.user = req.user._id;
     }
     // console.log(req.body);
