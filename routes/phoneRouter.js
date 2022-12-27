@@ -6,7 +6,12 @@ const router = express.Router();
 router
   .route("/")
   .get(phoneController.getAllPhones)
-  .post(authController.protect, phoneController.createOnePhone);
+  .post(
+    authController.protect,
+    phoneController.uploadPhoneImages,
+    phoneController.resizePhoneImages,
+    phoneController.createOnePhone
+  );
 router
   .route("/:id")
   .get(phoneController.getOnePhone)
