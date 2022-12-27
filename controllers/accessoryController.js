@@ -62,7 +62,6 @@ exports.getImage = catchAsync(async (req, res) => {
   // res.status(200).json({});
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      // next(err)
       console.log(err);
       res.status(500).json({
         err,
