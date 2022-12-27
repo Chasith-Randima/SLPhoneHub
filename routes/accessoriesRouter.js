@@ -6,7 +6,12 @@ const authController = require("./../controllers/authController");
 router
   .route("/")
   .get(accessoriesController.getAllAccessories)
-  .post(authController.protect, accessoriesController.createOneAccessory);
+  .post(
+    authController.protect,
+    accessoriesController.uploadAccessoryImages,
+    accessoriesController.resizeAccessoryImages,
+    accessoriesController.createOneAccessory
+  );
 router
   .route("/:id")
   .get(accessoriesController.getOneAccessory)

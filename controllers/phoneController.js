@@ -32,7 +32,7 @@ exports.resizePhoneImages = catchAsync(async (req, res, next) => {
       const filename = `phone-${req.user._id}-${Date.now()}-${i + 1}.jpeg`;
 
       await sharp(file.buffer)
-        .resize(2000, 1333)
+        .resize(2400, 1600)
         .toFormat("jpeg")
         .jpeg({ quality: 90 })
         .toFile(`public/img/phones/${filename}`);
