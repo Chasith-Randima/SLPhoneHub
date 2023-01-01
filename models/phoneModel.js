@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
+// phone schema
+
 const phoneSchema = new mongoose.Schema(
   {
     condition: {
