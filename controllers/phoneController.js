@@ -73,7 +73,6 @@ exports.getImage = catchAsync(async (req, res) => {
 
 exports.searchPhones = catchAsync(async (req, res) => {
   const { search } = req.query;
-  // console.log(search);
 
   if (search) {
     await Phone.find(
