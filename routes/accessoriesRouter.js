@@ -3,6 +3,8 @@ const router = express.Router();
 const accessoriesController = require("./../controllers/accessoryController");
 const authController = require("./../controllers/authController");
 
+// accessories routes
+
 router.use("/image/:imageName", accessoriesController.getImage);
 
 router

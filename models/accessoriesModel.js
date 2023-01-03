@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { default: slugify } = require("slugify");
 
+// accessories schema
+
 const accessorySchema = new mongoose.Schema({
   condition: {
     type: String,
