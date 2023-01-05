@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { default: slugify } = require("slugify");
 
+
+// wanted schema
+
 const wantedSchema = new mongoose.Schema({
   title: {
     type: String,

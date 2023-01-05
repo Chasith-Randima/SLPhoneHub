@@ -3,6 +3,7 @@ const router = express.Router();
 const wantedController = require("./../controllers/wantedController");
 const authController = require("./../controllers/authController");
 
+// wanted routes
 router
   .route("/")
   .get(wantedController.getAllWanted)
