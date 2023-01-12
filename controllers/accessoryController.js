@@ -49,7 +49,7 @@ exports.resizeAccessoryImages = catchAsync(async (req, res, next) => {
 exports.getImage = catchAsync(async (req, res) => {
   let fileName = req.params.imageName;
   // console.log(path.join(__dirname, "../public/img/accessories"));
-  // console.log(req.params);
+
   let options = {
     root: path.join(__dirname, "../public/img/accessories"),
     // path: `public/img/phones/${req.params.name}`,
