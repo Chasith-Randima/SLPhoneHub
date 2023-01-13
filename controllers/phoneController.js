@@ -92,7 +92,6 @@ exports.searchPhones = catchAsync(async (req, res) => {
       //     //   message: "There was an error...",
       //     // });
       //   }
-      //   console.log(phones);
 
       //   res.status(200).json(phones);
       // }
