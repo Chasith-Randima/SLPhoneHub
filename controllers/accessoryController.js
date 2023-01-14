@@ -4,6 +4,7 @@ const multer = require("multer");
 const sharp = require("sharp");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const path = require("path");
 
 const multerStorage = multer.memoryStorage();
 
@@ -43,6 +44,33 @@ exports.resizeAccessoryImages = catchAsync(async (req, res, next) => {
     })
   );
   next();
+});
+
+exports.getImage = catchAsync(async (req, res) => {
+  let fileName = req.params.imageName;
+  // console.log(path.join(__dirname, "../public/img/accessories"));
+  // console.log(req.params);
+  let options = {
+    root: path.join(__dirname, "../public/img/accessories"),
+    // path: `public/img/phones/${req.params.name}`,
+    dotfiles: "deny",
+    headers: {
+      "x-timestamp": Date.now(),
+      "x-sent": true,
+    },
+  };
+  // res.status(200).json({});
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      // next(err)
+      console.log(err);
+      res.status(500).json({
+        err,
+      });
+    } else {
+      console.log("Sent:", fileName);
+    }
+  });
 });
 
 exports.getAllAccessories = factory.getAll(Accessory);

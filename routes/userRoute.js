@@ -10,7 +10,7 @@ router.get("/logout", authController.logout);
 
 router.use(authController.protect);
 
-router.patch("/updateMyPassword", authController.updatePassword);
+router.patch("/updateMyPassword/:id", authController.updatePassword);
 
 router
   .route("/")
@@ -19,7 +19,8 @@ router
 
 router
   .route("/:id")
-  .get(authController.restrictTo("admin"), userController.getOneUser)
+  .get(userController.getOneUser)
+  // .get(authController.restrictTo("admin"), userController.getOneUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 

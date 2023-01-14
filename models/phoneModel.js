@@ -1,65 +1,83 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const phoneSchema = new mongoose.Schema({
-  condition: {
-    type: String,
-    required: [true, "Phone must have a condition..."],
-  },
-  brandname: {
-    type: String,
-    required: [true, "Phone must have a brand name..."],
-  },
-  model: {
-    type: String,
-    required: [true, "Phone must have a model..."],
-  },
-  slug: String,
-  network: {
-    type: String,
-  },
-  sim: {
-    type: String,
-  },
-  os: {
-    type: String,
-  },
-  memory: {
-    type: String,
-  },
-  main_camera: {
-    type: String,
-  },
-  selfie_camera: {
-    type: String,
-  },
-  sound: {
-    type: String,
-  },
-  wifi: {
-    type: String,
-  },
-  bluetooth: {
-    type: String,
-  },
-  radio: String,
-  usb: String,
-  sensors: String,
-  location: String,
-  phoneNumber: String,
-  price: Number,
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  images: [String],
-  user: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
+const phoneSchema = new mongoose.Schema(
+  {
+    condition: {
+      type: String,
+      required: [true, "Phone must have a condition..."],
     },
-  ],
-});
+    brandname: {
+      type: String,
+      required: [true, "Phone must have a brand name..."],
+    },
+    model: {
+      type: String,
+      required: [true, "Phone must have a model..."],
+    },
+    slug: {
+      type: String,
+    },
+    network: {
+      type: String,
+    },
+    sim: {
+      type: String,
+    },
+    os: {
+      type: String,
+    },
+    memory: {
+      type: String,
+    },
+    main_camera: {
+      type: String,
+    },
+    selfie_camera: {
+      type: String,
+    },
+    sound: {
+      type: String,
+    },
+    wifi: {
+      type: String,
+    },
+    bluetooth: {
+      type: String,
+    },
+    radio: {
+      type: String,
+    },
+    usb: {
+      type: String,
+    },
+    sensors: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    price: {
+      type: Number,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    images: [String],
+    description: String,
+    user: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+    ],
+  }
+  // { typeKey: "$type" }
+);
 
 phoneSchema.pre("save", function (next) {
   this.slug = slugify(`${this.brandname}_${this.model}_${this.condition}`, {

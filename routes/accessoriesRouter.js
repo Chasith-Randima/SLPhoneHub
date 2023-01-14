@@ -3,6 +3,8 @@ const router = express.Router();
 const accessoriesController = require("./../controllers/accessoryController");
 const authController = require("./../controllers/authController");
 
+router.use("/image/:imageName", accessoriesController.getImage);
+
 router
   .route("/")
   .get(accessoriesController.getAllAccessories)
@@ -15,7 +17,12 @@ router
 router
   .route("/:id")
   .get(accessoriesController.getOneAccessory)
-  .patch(authController.protect, accessoriesController.updateOneAccessory)
+  .patch(
+    authController.protect,
+    accessoriesController.uploadAccessoryImages,
+    accessoriesController.resizeAccessoryImages,
+    accessoriesController.updateOneAccessory
+  )
   .delete(authController.protect, accessoriesController.deleteOneAccessory);
 
 module.exports = router;
