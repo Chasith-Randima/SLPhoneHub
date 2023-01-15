@@ -7,7 +7,7 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/([""])(\\?.)*?\1/)[0];
-  console.log(value);
+  // console.log(value);
 
   const message = `Duplicate field value:${value}. Please use another value `;
 
@@ -28,7 +28,7 @@ const handleJWTExpiredError = () =>
   new AppError("your token has expired,please log in again", 401);
 
 const sendErrorDev = (err, req, res) => {
-  console.log(req.originalUrl);
+  // console.log(req.originalUrl);
 
   if (req.originalUrl.startsWith("/api")) {
     return res.status(err.statusCode).json({
@@ -41,6 +41,8 @@ const sendErrorDev = (err, req, res) => {
   return res.status(err.statusCode).render("error", {
     title: "Something went Wrong...!",
     msg: err.message,
+    status: "failed...",
+    message: "there was an error....",
   });
 };
 
@@ -55,7 +57,7 @@ const sendErrorProd = (err, req, res) => {
 
     // .error("ERROR",err);
     return res.status(500).json({
-      staus: "error",
+      status: "failed",
       message: "something went very wrong!",
     });
   }
@@ -69,7 +71,7 @@ const sendErrorProd = (err, req, res) => {
 
   console.error("ERROR", err);
   return res.status(500).json({
-    staus: "error",
+    status: "failed",
     message: "Please try again later",
   });
 };

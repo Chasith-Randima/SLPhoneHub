@@ -21,6 +21,7 @@ exports.createOne = (Model, name_model) =>
 
     res.status(200).json({
       status: "success",
+      message: "posted successfully...",
       doc,
     });
   });
@@ -39,13 +40,14 @@ exports.getOne = (Model, popOptions) =>
 
     res.status(200).json({
       status: "success",
+      message: "found the document...",
       doc,
     });
   });
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.params, req.query);
+    // console.log(req.params, req.query);
     let filter = {};
     if (req.params.id) filter = { user: req.params.id };
     // console.log(req.params.id);
@@ -68,7 +70,7 @@ exports.getAll = (Model) =>
     //   console.log(query);
     // }
 
-    console.log(req.query);
+    // console.log(req.query);
 
     // const features = new APIFeatures(Model.find(), req.query)
     const features = new APIFeatures(Model.find(filter), req.query)
@@ -87,7 +89,7 @@ exports.getAll = (Model) =>
       .sort()
       .limitFields();
     let totalCount = await count.query.countDocuments();
-    console.log(totalCount);
+    // console.log(totalCount);
 
     // const count = await Model.countDocuments(
     //   new APIFeatures(Model.find(filter), req.query)
@@ -101,6 +103,7 @@ exports.getAll = (Model) =>
 
     res.status(200).json({
       status: "success",
+      message: `${doc.length} documents found...`,
       results: doc.length,
       totalCount,
       doc,
@@ -123,6 +126,7 @@ exports.updateOne = (Model) =>
 
     res.status(200).json({
       status: "success",
+      message: "ducument updated successfully....",
       doc,
     });
   });
@@ -137,6 +141,6 @@ exports.deleteOne = (Model) =>
 
     res.status(200).json({
       status: "success",
-      message: "Document deleted...",
+      message: "Document deleted successfully...",
     });
   });

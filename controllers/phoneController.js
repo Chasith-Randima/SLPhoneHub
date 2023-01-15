@@ -25,7 +25,7 @@ exports.uploadPhoneImages = upload.fields([{ name: "images", maxCount: 5 }]);
 
 exports.resizePhoneImages = catchAsync(async (req, res, next) => {
   if (!req.files.images) return next();
-  console.log(req.files);
+  // console.log(req.files);
 
   req.body.images = [];
 
@@ -47,7 +47,7 @@ exports.resizePhoneImages = catchAsync(async (req, res, next) => {
 
 exports.getImage = catchAsync(async (req, res) => {
   let fileName = req.params.imageName;
-  console.log(path.join(__dirname, "../public/img/phones"));
+  // console.log(path.join(__dirname, "../public/img/phones"));
   let options = {
     root: path.join(__dirname, "../public/img/phones"),
     // path: `public/img/phones/${req.params.name}`,
@@ -73,7 +73,7 @@ exports.getImage = catchAsync(async (req, res) => {
 
 exports.searchPhones = catchAsync(async (req, res) => {
   const { search } = req.query;
-  console.log(search);
+  // console.log(search);
 
   if (search) {
     await Phone.find(
@@ -102,15 +102,19 @@ exports.searchPhones = catchAsync(async (req, res) => {
         "-images -description -network -sim -os -memory -main_camera -selfie_camera -sound -wifi -bluetooth -radio -usb -sensors -location -phoneNumber -price -createdAt -user"
       )
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.status(200).json({
           status: "success",
-          message: "success",
+          message: `${data.length} found...`,
           data,
         });
       })
       .catch((err) => {
         console.log(err);
+        res.status(400).json({
+          message: "failed",
+          message: err,
+        });
       });
   }
 });
